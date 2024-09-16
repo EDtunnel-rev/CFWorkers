@@ -26,9 +26,14 @@ async function handleRequest(request) {
         return new Response(html, {
           headers: { 'Content-Type': 'text/plain; charset=utf-8' }
         })
-      } else if (type === 'js' && contentType.includes('text/javascript')) {
+      } else if (type === 'js' && contentType.includes('javascript')) {
         const js = await res.text()
         return new Response(js, {
+          headers: { 'Content-Type': 'text/plain; charset=utf-8' }
+        })
+      } else if (type === 'css' && contentType.includes('css')) {
+        const css = await res.text()
+        return new Response(css, {
           headers: { 'Content-Type': 'text/plain; charset=utf-8' }
         })
       } else {
@@ -76,11 +81,12 @@ function renderHTML() {
     </head>
     <body>
 
-    <h2>输入网址，获取 HTML 或 JS 代码</h2>
+    <h2>输入网址，获取 HTML、JS 或 CSS 代码</h2>
     <input id="urlInput" type="text" placeholder="输入网址" />
     <select id="typeSelect">
       <option value="html">HTML</option>
       <option value="js">JS</option>
+      <option value="css">CSS</option>
     </select>
     <button id="fetchBtn">获取代码</button>
     <button id="copyBtn">一键复制</button>
